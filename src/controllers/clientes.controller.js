@@ -52,3 +52,18 @@ export const remove = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+export const buscarClientes = async (req, res) => {
+  try {
+    const { search } = req.query;
+
+    const clientes = await clientesService.buscarClientes(search);
+
+    res.json(clientes);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al buscar clientes" });
+  }
+};

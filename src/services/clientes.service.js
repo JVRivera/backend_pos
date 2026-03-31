@@ -42,3 +42,41 @@ export const deleteCliente = async (id) => {
     where: { id: Number(id) },
   });
 };
+
+//buscar cliente por nombre 
+export const buscarClientes = async (search) => {
+  return await prisma.clientes.findMany({
+    where: {
+      OR: [
+        {
+          nombre: {
+            contains: search,
+            mode: "insensitive"
+          }
+        },
+        {
+          direccion: {
+            contains: search,
+            mode: "insensitive"
+          }
+        },        
+        {
+          telefono: {
+            contains: search,
+            mode: "insensitive"
+          }
+        },
+        {
+          nit: {
+            contains: search,
+            mode: "insensitive"
+          }
+        }
+      ]
+    },
+    take: 20,
+    orderBy: {
+      nombre: "asc"
+    }
+  });
+};
