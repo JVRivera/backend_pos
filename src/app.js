@@ -15,7 +15,20 @@ dotenv.config();
 const app = express();
 
 // 3. Middlewares
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173' // Vite local
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  }
+}));
 app.use(express.json());
 
 // 4. Rutas de prueba
