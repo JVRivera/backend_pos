@@ -44,3 +44,30 @@ export const deleteArticulo = async (id) => {
     where: { id: Number(id) },
   });
 };
+
+
+//buscar articulos por nombre 
+export const buscarArticulos = async (search) => {
+  return await prisma.articulos.findMany({
+    where: {
+      OR: [
+        {
+          articulo: {
+            contains: search,
+            mode: "insensitive"
+          }
+        },
+        {
+          descripcion: {
+            contains: search,
+            mode: "insensitive"
+          }
+        }
+      ]
+    },
+    take: 20,
+    orderBy: {
+      articulo: "asc"
+    }
+  });
+};
