@@ -43,7 +43,7 @@ export const deleteCliente = async (id) => {
   });
 };
 
-//buscar cliente por nombre 
+//buscar cliente por nombre, direccion, telefono, nit
 export const buscarClientes = async (search) => {
   return await prisma.clientes.findMany({
     where: {

@@ -7,6 +7,7 @@ import articulosRoutes from './routers/articulos.routes.js';
 import clientesRoutes from './routers/clientes.routes.js';
 import usuariosRoutes from './routers/usuarios.router.js';
 import authRoutes from "./routers/auth.routes.js";
+import ventasRoutes from "./routers/ventas.router.js";
 
 //1. leer variables de entorno
 dotenv.config();
@@ -44,6 +45,8 @@ app.use('/api/clientes', clientesRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 //ruta para login
 app.use("/api/auth", authRoutes);
+// registrar ventas
+app.use("/api/ventas", ventasRoutes);
 
 //prueba de conexion que muestra los datos de la tabla articulos
 app.get('/test-db', async (req, res) => {
