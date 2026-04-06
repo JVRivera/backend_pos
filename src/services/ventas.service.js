@@ -2,6 +2,8 @@ import { prisma } from '../config/prisma.js';
 
 export const crearVenta = async (data) => {
 
+  console.log(data);
+
   const {
     idcliente,
     subtotal,
@@ -27,13 +29,13 @@ export const crearVenta = async (data) => {
     await tx.detallefacturas.createMany({
       data: detalle.map(item => ({
         idfactura: factura.id,
-        idarticulo: item.idarticulo,
-        cantidad: item.cantidad,
-        precioventa: item.precioventa,
-        preciocosto: item.preciocosto,
+        idarticulo: Number(item.idarticulo),
+        cantidad: Number(item.cantidad),
+        precioventa: Number(item.precioventa),
+        preciocosto: Number(item.preciocosto),
         tipodesc: item.tipodesc,
-        descuento: item.descuento,
-        total: item.total
+        descuento: Number(item.descuento),
+        total: Number(item.total)
       }))
     });
 
