@@ -22,7 +22,12 @@ export const create = async (req, res) => {
     const data = await clientesService.createCliente(req.body);
     res.status(201).json(data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error.message);
+    res.status(500).json({
+      message: error.message,
+      code: error.code,
+      meta: error.meta
+    });
   }
 };
 
